@@ -76,13 +76,9 @@ const Navbar = () => {
               <UserButton>
                 <UserButton.MenuItems>
                   <UserButton.Action
-                    labelIcon={
-                      <PackageIcon
-                        size={16}
-                        label="My Orders"
-                        onClick={() => router.push("/orders")}
-                      />
-                    }
+                    labelIcon={<PackageIcon size={16} />}
+                    label="My Orders"
+                    onClick={() => router.push("/orders")}
                   />
                 </UserButton.MenuItems>
               </UserButton>
@@ -97,26 +93,18 @@ const Navbar = () => {
                 <UserButton>
                   <UserButton.MenuItems>
                     <UserButton.Action
-                      labelIcon={
-                        <PackageIcon
-                          size={16}
-                          label="Cart"
-                          onClick={() => router.push("/cart")}
-                        />
-                      }
+                      labelIcon={<PackageIcon size={16} />}
+                      label="Cart"
+                      onClick={() => router.push("/cart")}
                     />
                   </UserButton.MenuItems>
                 </UserButton>
                 <UserButton>
                   <UserButton.MenuItems>
                     <UserButton.Action
-                      labelIcon={
-                        <PackageIcon
-                          size={16}
-                          label="My Orders"
-                          onClick={() => router.push("/orders")}
-                        />
-                      }
+                      labelIcon={<PackageIcon size={16} />}
+                      label="My Orders"
+                      onClick={() => router.push("/orders")}
                     />
                   </UserButton.MenuItems>
                 </UserButton>
