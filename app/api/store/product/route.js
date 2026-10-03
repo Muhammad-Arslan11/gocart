@@ -36,7 +36,7 @@ export async function POST(request) {
     const imagesUrl = await Promise.all(async (image) => {
       const buffer = Buffer.from(await image.arrayBuffer());
       const response = await imagekit.upload({
-        file: buffer,
+        file: await toFile(buffer, image.name),
         fileName: image.name,
         folder: "products",
       });
@@ -68,7 +68,7 @@ export async function POST(request) {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { error: error.message | error.code },
+      { error: error.message || error.code },
       { status: 400 },
     );
   }

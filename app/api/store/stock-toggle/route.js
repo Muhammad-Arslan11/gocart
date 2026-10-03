@@ -36,7 +36,7 @@ export async function POST(request) {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { error: error.message | error.code },
+      { error: error.message || error.code },
       { status: 400 },
     );
   }

@@ -32,10 +32,12 @@ export default function CreateStore() {
   };
 
   const fetchSellerStatus = async () => {
+    const token = await getToken();
     try {
       const { data } = await axios.post("/api/store/create", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("data: ", data);
       if (["approved", "pending", "rejected"].includes(data.status)) {
         setStatus(data.status);
         setAlreadySubmitted(true);
@@ -76,8 +78,7 @@ export default function CreateStore() {
       if (!user) {
         return toast("Please login into your account!");
       }
-      const { getToken } = useAuth();
-      const token = getToken();
+      const token = await getToken();
       const formData = new FormData();
       formData.append("name", storeInfo.name);
       formData.append("username", storeInfo.username);
@@ -85,8 +86,8 @@ export default function CreateStore() {
       formData.append("email", storeInfo.email);
       formData.append("address", storeInfo.address);
       formData.append("contact", storeInfo.contact);
-
       formData.append("image", storeInfo.image);
+
       const { data } = await axios.post("/api/store/create", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
