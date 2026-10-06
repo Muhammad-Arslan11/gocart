@@ -29,7 +29,7 @@ export async function GET(request) {
       include: { user: true, product: true },
     });
 
-    const dashboradData = {
+    const dashboardData = {
       ratings,
       totalOrders: orders.length,
       totalEarnings: Math.round(
@@ -38,7 +38,7 @@ export async function GET(request) {
       products: products.length,
     };
 
-    return NextResponse.json({ dashboradData });
+    return NextResponse.json({ dashboardData });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

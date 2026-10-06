@@ -23,9 +23,9 @@ export async function POST(request) {
     const mrp = Number(formData.get("mrp"));
     const price = Number(formData.get("price"));
     const category = formData.get("category");
-    const image = formData.getAll("image");
+    // const image = formData.getAll("image");   TODO: do it later
 
-    if (!validString(name) || !validString(description) || image.length < 1) {
+    if (!validString(name) || !validString(description)) {
       return NextResponse.json(
         { error: "Missing store data info." },
         { status: 400 },
@@ -33,23 +33,23 @@ export async function POST(request) {
     }
 
     // upload images to imagekit
-    const imagesUrl = await Promise.all(async (image) => {
-      const buffer = Buffer.from(await image.arrayBuffer());
-      const response = await imagekit.upload({
-        file: await toFile(buffer, image.name),
-        fileName: image.name,
-        folder: "products",
-      });
-      const url = await imagekit.url({
-        path: response.filePath,
-        transformation: [
-          { quality: "auto" },
-          { format: "webp" },
-          { width: 512 },
-        ],
-      });
-      return url;
-    });
+    // const imagesUrl = await Promise.all(async (image) => {
+    //   const buffer = Buffer.from(await image.arrayBuffer());
+    //   const response = await imagekit.upload({
+    //     file: await toFile(buffer, image.name),
+    //     fileName: image.name,
+    //     folder: "products",
+    //   });
+    //   const url = await imagekit.url({
+    //     path: response.filePath,
+    //     transformation: [
+    //       { quality: "auto" },
+    //       { format: "webp" },
+    //       { width: 512 },
+    //     ],
+    //   });
+    //   return url;
+    // });
 
     // upload data to the database
     await prisma.product.create({
@@ -60,7 +60,6 @@ export async function POST(request) {
         mrp,
         price,
         category,
-        images: imagesUrl,
       },
     });
 
