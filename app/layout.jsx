@@ -16,10 +16,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${outfit.className} antialiased`}>
         <ClerkProvider>
-          <StoreProvider>
-            <Toaster />
-            {children}
-          </StoreProvider>
+          <Toaster />
+          {children}
         </ClerkProvider>
       </body>
     </html>
